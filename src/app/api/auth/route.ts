@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest } from 'next'
 import { NextResponse } from "next/server";
 const bcrypt = require("bcrypt")
 
@@ -12,10 +12,7 @@ export async function GET(request: NextApiRequest) {
 
 
 // Handle login form
-export async function POST (
-    request: NextApiRequest,
-    // response: NextApiResponse
-) {
+export async function POST (request: NextApiRequest) {
     const data = await request.json()
     
     // Compare hashes to user account
@@ -26,20 +23,20 @@ export async function POST (
     
     
     if (userMatch && passMatch) {
+        // Generate cookie and send OK
         const cookieHash: string = await bcrypt.hashSync(process.env.AUTH_COOKIE, 10)
-        const response = NextResponse.next()
-        response.cookies.set({
-            name: 'auth',
-            value: cookieHash,
-            httpOnly: true,
-        })
-        return response
 
-        // response.setHeader("set-cookie", `auth=${cookieHash}; path=/; samesite=lax; httponly;`)
-        // response.redirect("/dasboard")
+        const message: Object = {
+            message: "Good auth.",
+            cookie: {"auth": cookieHash}
+        }
+        return NextResponse.json(message, { status: 200 })
     } else {
-        // response.status(401).json({ message: "Bad auth. Try again." })
-        console.log("bad")
+        const message: Object = {
+            message: "Bad auth. Try again.",
+            error: "Invalid Credentials."
+        }
+        return NextResponse.json(message, { status: 200 })
     }
 
 }
