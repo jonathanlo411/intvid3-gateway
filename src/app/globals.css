@@ -1,4 +1,7 @@
 :root {
+  --base-bg: #2C2C2C;
+  --base-mod: #191919;
+  --sdsc-red: #d31820;
 }
 
 * {
@@ -6,3 +9,5 @@
   padding: 0;
   margin: 0;
 }
+
+body { background-color: var(--base-bg); color: white; }

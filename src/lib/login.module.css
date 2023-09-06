@@ -1,0 +1,35 @@
+.loginInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1%;
+    font-size: 1.25rem;
+    margin: 2%;
+}
+.loginInput > input {
+    padding: 2% 4%;
+    font-size: 1.15rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin: 1% 0;
+}
+.loginInput > input:focus {
+    outline: none;
+}
+#submitBT {
+    background-color: var(--sdsc-red);
+    color: white;
+    width: 100%;
+    padding: 2% 4%;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 2% 0;
+    text-align: center;
+    transition: 0.3s;
+}
+#submitBT:hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
